@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lau ♥</title>
+    <!-- Fuentes de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-yellow: #f1c40f;
+            --accent-gold: #f39c12;
+            --text-gold: #f5d061;
+            --bg-dark: #070707;
+            --card-bg: #fbf5e8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .font-cursive {
+            font-family: 'Great Vibes', cursive;
+        }
+
+        .font-handwriting {
+            font-family: 'Caveat', cursive;
+        }
+
+        /* --- ANIMACIÓN DE PÉTALOS CAYENDO --- */
+        #petals-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 99;
+            overflow: hidden;
+        }
+
+        .petal {
+            position: absolute;
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            border-radius: 15px 0px 15px 0px;
+            opacity: 0.8;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                top: -10%;
+                transform: translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.9; }
+            90% { opacity: 0.9; }
+            100% {
+                top: 105%;
+                transform: translateX(100px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+
+        /* --- ESTILOS DE SECCIONES --- */
+        section {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            background-size: cover;
+            background-position: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.6) 100%);
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* --- SECCIÓN 1: PORTADA CON GIRA SOLES Y FOTO L1 A UN LADO --- */
+        #hero {
+            background-image: url('https://wallpapers.com/images/hd/4k-sky-sunflower-field-golden-hour-abyht6gqdxx6waau.jpg');
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .hero-photo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-photo {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255, 215, 0, 0.8);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 20px rgba(241, 196, 15, 0.4);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero-title {
+            font-size: 3.8rem;
+            color: #ffffff;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            font-weight: 300;
+            margin: 20px 0;
+            line-height: 1.5;
+            color: #f0f0f0;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+        }
+
+        .btn-carta {
+            background: #f1c40f;
+            color: #000;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(241, 196, 15, 0.4);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s, background-color 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-carta:hover {
+            transform: scale(1.05);
+            background: #f39c12;
+        }
+
+        .side-text-top {
+            position: absolute;
+            right: 5%;
+            top: 10%;
+            text-align: right;
+            color: #ffffff;
+            font-size: 2rem;
+            line-height: 1.2;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+            z-index: 2;
+        }
+
+        /* --- SECCIÓN 2: CARTA Y ANIMACIÓN DE SOBRE --- */
+        #carta-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('https://images.unsplash.com/photo-1508615070457-7baeba4003ab?auto=format&fit=crop&w=1920&q=80');
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr 1fr;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .side-message {
+            text-align: center;
+        }
+
+        .side-message h2 {
+            font-size: 3.2rem;
+            color: var(--text-gold);
+            line-height: 1.1;
+        }
+
+        .side-message p {
+            font-size: 0.9rem;
+            color: #d0d0d0;
+            margin-top: 15px;
+        }
+
+        /* ANIMACIÓN DE SOBRE Y CARTA */
+        .envelope-wrapper {
+            perspective: 1000px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .envelope-container {
+            position: relative;
+            width: 100%;
+            max-width: 420px;
+            background: #d4a359;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+            transition: transform 0.8s ease;
+            transform-style: preserve-3d;
+        }
+
+        /* Clase activada con JavaScript */
+        .envelope-container.open {
+            animation: openEnvelope 1.2s forwards ease-in-out;
+        }
+
+        @keyframes openEnvelope {
+            0% { transform: scale(0.8) rotateX(20deg); }
+            50% { transform: scale(1.05) rotateX(0deg); }
+            100% { transform: scale(1); }
+        }
+
+        .paper-letter {
+            background-color: var(--card-bg);
+            color: #2b2b2b;
+            padding: 35px 25px;
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            position: relative;
+            font-family: 'Caveat', cursive;
+            font-size: 1.35rem;
+            line-height: 1.4;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease 0.4s;
+        }
+
+        .envelope-container.open .paper-letter {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- SECCIÓN 3: GALERÍA DE FOTOS --- */
+        #galeria-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=1920&q=80');
+        }
+
+        .gallery-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .slider-wrapper {
+            display: flex;
+            gap: 20px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 680px;
+            scroll-behavior: smooth;
+        }
+
+        .photo-card {
+            min-width: calc(50% - 10px);
+            height: 280px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+            flex-shrink: 0;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .nav-btn {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #fff;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            transition: 0.3s;
+            flex-shrink: 0;
+        }
+
+        .nav-btn:hover {
+            border-color: var(--primary-yellow);
+            color: var(--primary-yellow);
+            background: rgba(0,0,0,0.8);
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background: var(--primary-yellow);
+        }
+
+        /* --- SECCIÓN 4: RAMO --- */
+        #ramo-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1508615070457-7baeba4003ab?auto=format&fit=crop&w=1920&q=80');
+        }
+
+        .ramo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr 1fr;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .ramo-img-container {
+            text-align: center;
+        }
+
+        .ramo-img-container img {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.8));
+        }
+
+        .message-box {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #e0e0e0;
+            text-align: center;
+        }
+
+        .message-box .highlight {
+            color: var(--text-gold);
+            font-size: 2.2rem;
+            margin-top: 20px;
+            display: block;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 40px 20px;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.9), #000000), url('https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: bottom;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        footer h3 {
+            color: var(--text-gold);
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            font-size: 0.8rem;
+            color: #888;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* ADAPTABILIDAD MÓVIL */
+        @media (max-width: 768px) {
+            .hero-grid, .section-grid, .ramo-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .side-text-top {
+                position: static;
+                text-align: center;
+                margin-top: 20px;
+            }
+            .hero-title {
+                font-size: 3rem;
+            }
+            .photo-card {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Animación de pétalos -->
+    <div id="petals-container"></div>
+
+    
+
+    <!-- SECCIÓN 1: PORTADA CON GIRA SOLES Y FOTO L1 -->
+    <section id="hero">
+        <div class="overlay"></div>
+        <div class="content">
+            <div class="hero-grid">
+                
+                <!-- Foto l1 a un lado -->
+                <div class="hero-photo-container">
+                    <img src="l1.jpeg" alt="Lau" class="hero-photo">
+                </div>
+
+                <!-- Textos principales -->
+                <div>
+                    <h1 class="hero-title font-cursive">Feliz Día de las<br>Flores Amarillas</h1>
+                    <div style="color: var(--text-gold); font-size: 1.5rem; margin: 10px 0;">♡</div>
+                    
+                    <p class="hero-subtitle">
+                        Un pequeño detalle para la persona que hace mis días más bonitos...
+                    </p>
+                    
+                    <button class="btn-carta" id="btnAbrirCarta">
+                        Click para Abrir mi carta ♥
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="side-text-top font-cursive">
+            De: Jefferson<br><br>Para: Lau<br>♡
+        </div>
+    </section>
+
+    <!-- SECCIÓN 2: CARTA INTERACTIVA -->
+    <section id="carta-section">
+        <div class="overlay"></div>
+        <div class="content">
+            <div class="section-grid">
+                
+                <!-- Mensaje Izquierdo -->
+                <div class="side-message">
+                    <h2 class="font-cursive">Una carta<br>para ti...</h2>
+                    <div style="color: var(--text-gold); font-size: 1.5rem; margin-top: 5px;">♡</div>
+                    <p>Porque hay cosas que solo quiero decirte de esta manera...</p>
+                </div>
+
+                <!-- Carta Central Animada -->
+                <div class="envelope-wrapper">
+                    <div class="envelope-container" id="envelope">
+                        <div class="paper-letter font-handwriting">
+                            <div style="text-align: center; font-size: 1.2rem;">♡</div>
+                            <p><strong>Lau,</strong></p>
+                            <p style="margin-top: 10px;">
+                                No sé cómo explicarte todo lo que siento, pero hoy quiero que sepas que eres una de las personas más especiales en mi vida.
+                            </p>
+                            <p style="margin-top: 10px;">
+                                Tu sonrisa, tu forma de ser, tu manera de ver la vida... todo en ti me encanta. Eres increíble, única y haces que cada día sea más bonito.
+                            </p>
+                            <p style="margin-top: 10px;">
+                                No necesito una fecha especial para recordarte cuánto te quiero, pero hoy, en el Día de las Flores Amarillas, quiero regalarte este pequeño detalle para la persona que hace mis días más felices.
+                            </p>
+                            <p style="margin-top: 10px;">
+                                Gracias por ser tú, por estar, por todo.
+                            </p>
+                            <p style="margin-top: 15px; text-align: center;">
+                                Te Amo y quiero mucho, Lau. ♡
+                            </p>
+                            <div style="color: #c0392b; text-align: center; margin-top: 10px;">♡</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mensaje Derecho -->
+                <div class="side-message">
+                    <h2 class="font-cursive" style="font-size: 2.8rem;">Gracias por<br>Cruzarte en mi camino...</h2>
+                    <div style="color: var(--text-gold); font-size: 1.5rem; margin-top: 10px;">♡</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 3: GALERÍA DE FOTOS -->
+    <section id="galeria-section">
+        <div class="overlay"></div>
+        <div class="content">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+                
+                <div style="max-width: 300px;">
+                    <h2 class="font-cursive" style="font-size: 3rem; color: var(--text-gold);">Tú, en todas<br>tus versiones</h2>
+                    <div style="color: var(--text-gold); font-size: 1.2rem; margin: 10px 0;">♡</div>
+                    <p style="font-size: 0.85rem; color: #ccc; line-height: 1.5;">
+                        Cada foto es un recordatorio de lo increíble y hermosa que eres...<br>
+                        Y de lo mucho que me gusta tenerte en mi vida.
+                    </p>
+                    <div style="color: var(--text-gold); font-size: 1.2rem; margin-top: 10px;">♡</div>
+                </div>
+
+                <div style="flex: 1; max-width: 700px;">
+                    <div class="gallery-container">
+                        <button class="nav-btn" id="prevBtn">&lt;</button>
+                        
+                        <div class="slider-wrapper" id="sliderWrapper">
+                            <div class="photo-card">
+                                <img src="l1.jpeg" alt="Lau foto 1">
+                            </div>
+                            <div class="photo-card">
+                                <img src="l2.jpeg" alt="Lau foto 2">
+                            </div>
+                            <div class="photo-card">
+                                <img src="l3.jpeg" alt="Lau foto 3">
+                            </div>
+                        </div>
+
+                        <button class="nav-btn" id="nextBtn">&gt;</button>
+                    </div>
+
+                    <div class="slider-dots">
+                        <div class="dot active"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 4: RAMO DE FLORES -->
+    <section id="ramo-section">
+        <div class="overlay"></div>
+        <div class="content">
+            <div class="ramo-grid">
+                
+                <div>
+                    <h2 class="font-cursive" style="font-size: 3.2rem; color: var(--text-gold);">Aunque me hubiera encantado dartelas fisicamente,  <br>Estas Flores son para ti...</h2>
+                    <div style="color: var(--text-gold); font-size: 1.5rem; margin-top: 10px;">♡</div>
+                </div>
+
+                <div class="ramo-img-container">
+                    <img src="flores.png" alt="Ramo de Flores Amarillas">
+                </div>
+
+                <div class="message-box">
+                    <p>
+                        Espero que estas flores amarillas te recuerden lo especial que eres para mí. Que siempre sonrías, que nunca dejes de ser tú y que sepas que estoy muy agradecido de tenerte en mi vida.
+                    </p>
+                    <span class="highlight font-cursive">
+                        Te quiero mucho,<br>
+                        Lau, mi amor, mi chiquita hermosa.
+                    </span>
+                    <div style="color: var(--text-gold); font-size: 1.5rem; margin-top: 10px;">♡</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div style="color: var(--text-gold); margin-bottom: 5px;">♡</div>
+        <h3 class="font-cursive">Gracias por ser parte de mi vida</h3>
+        <div style="color: var(--text-gold); margin: 5px 0;">♡</div>
+        <p style="margin-top: 15px; font-size: 0.75rem; color: #aaa;">— Siempre tú —</p>
+    </footer>
+
+    <script>
+        // --- GENERADOR DE PÉTALOS EN MOVIMIENTO ---
+        function createPetals() {
+            const container = document.getElementById('petals-container');
+            const petalCount = 30;
+
+            for (let i = 0; i < petalCount; i++) {
+                const petal = document.createElement('div');
+                petal.classList.add('petal');
+                
+                const width = Math.random() * 12 + 10;
+                const height = Math.random() * 18 + 12;
+                petal.style.width = `${width}px`;
+                petal.style.height = `${height}px`;
+
+                petal.style.left = `${Math.random() * 100}%`;
+
+                const duration = Math.random() * 5 + 5;
+                const delay = Math.random() * 5;
+                petal.style.animationDuration = `${duration}s`;
+                petal.style.animationDelay = `${delay}s`;
+
+                container.appendChild(petal);
+            }
+        }
+
+        createPetals();
+
+        // --- ANIMACIÓN DE APERTURA DE LA CARTA ---
+        const btnAbrirCarta = document.getElementById('btnAbrirCarta');
+        const envelope = document.getElementById('envelope');
+
+        btnAbrirCarta.addEventListener('click', () => {
+            // Desplazar suavemente hasta la sección de la carta
+            document.getElementById('carta-section').scrollIntoView({ behavior: 'smooth' });
+            
+            // Activar animación del sobre tras el scroll
+            setTimeout(() => {
+                envelope.classList.add('open');
+            }, 600);
+        });
+
+        // --- CARRUSEL DE GALERÍA ---
+        const sliderWrapper = document.getElementById('sliderWrapper');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const dots = document.querySelectorAll('.dot');
+        const cards = document.querySelectorAll('.photo-card');
+
+        let currentIndex = 0;
+
+        function updateSlider() {
+            const cardWidth = cards[0].offsetWidth + 20;
+            sliderWrapper.scrollTo({
+                left: currentIndex * cardWidth,
+                behavior: 'smooth'
+            });
+
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === currentIndex);
+            });
+        }
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex < cards.length - 1) ? currentIndex + 1 : 0;
+            updateSlider();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : cards.length - 1;
+            updateSlider();
+        });
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentIndex = index;
+                updateSlider();
+            });
+        });
+    </script>
+
+</body>
+</html>
